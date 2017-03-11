@@ -7,8 +7,26 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d45883eb52589ddaebc5dac6df785af4ad4125e6">
+        sha1="5024bed4c602e1ccfc5f48929f4c06c99f56d798">
         <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d0a3d825c12d45aca4956f95e95b7a9515e04bf\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android_SDK\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_858e3374f9bb95ffd9e71dabe2aa496cb035afd7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\sazal\.android\build-cache\7b4c867a30349fc83f9266bda81b34f389761877\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\classes_91652400ed53348b2dfcfd09c43970897739bdec.jar" />
     </item>
     <item
         is-multidex="true"
