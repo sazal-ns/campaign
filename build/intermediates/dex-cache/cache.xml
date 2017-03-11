@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\Projects\Campaign\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d45883eb52589ddaebc5dac6df785af4ad4125e6">
+        <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d0a3d825c12d45aca4956f95e95b7a9515e04bf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Projects\Campaign\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a4b28a51ac68c7f0802fa687b875016e2cac28cd\classes.dex" />
+    </item>
+
+</items>
