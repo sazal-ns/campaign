@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="5024bed4c602e1ccfc5f48929f4c06c99f56d798">
+        sha1="f5111b020cbc7a8812791d0478be6eb8f8f01a65">
         <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d0a3d825c12d45aca4956f95e95b7a9515e04bf\classes.dex" />
     </item>
     <item
@@ -36,6 +36,15 @@
         revision="25.0.2"
         sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
         <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a4b28a51ac68c7f0802fa687b875016e2cac28cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\sazal\.android\build-cache\60a3e0b97cc01ecd59759a8ff4d2dba5201f550c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6db27db925ea9e1d26bfb44641638392b97c0393\classes.dex" />
     </item>
 
 </items>

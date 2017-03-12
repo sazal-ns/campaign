@@ -3,33 +3,43 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_person_indigo_a700_36dp"
+            android:title="@string/about"/>
+        <item
+            android:id="@+id/nav_latest_update"
+            android:icon="@drawable/ic_fiber_new_indigo_a700_36dp"
+            android:title="@string/latest_update" />
+        <item
+            android:id="@+id/nav_achievement"
+            android:icon="@drawable/ic_star_indigo_a700_36dp"
+            android:title="@string/achievement"/>
+        <item
+            android:id="@+id/nav_resume"
+            android:icon="@drawable/ic_description_indigo_a700_36dp"
+            android:title="@string/resume"/>
+        <item
+            android:id="@+id/nav_education"
+            android:icon="@drawable/ic_school_indigo_a700_36dp"
+            android:title="@string/education"/>
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/ic_photo_library_indigo_a700_36dp"
+            android:title="@string/gallery" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_social"
+            android:icon="@drawable/ic_pages_indigo_a700_36dp"
+            android:title="@string/social" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/be_a_part">
         <menu>
+            <group android:checkableBehavior="single">
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_reg"
+                android:icon="@drawable/ic_person_add_indigo_a700_36dp"
+                android:title="@string/reg" />
+            </group>
         </menu>
     </item>
 
