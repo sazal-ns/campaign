@@ -15,6 +15,15 @@ public class AboutSocial{
 	public static String sectionAboutLink;
 	public static String logo;
 	public static String slink3Name;
+	public static String adminEmail;
+
+	public static String getAdminEmail() {
+		return adminEmail;
+	}
+
+	public static void setAdminEmail(String adminEmail) {
+		AboutSocial.adminEmail = adminEmail;
+	}
 
 	public static String getSlink2Name() {
 		return slink2Name;

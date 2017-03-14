@@ -57,8 +57,19 @@ public class SplashActivity extends AppCompatActivity {
 
                         DownImageTask downImageTask = new DownImageTask();
                         downImageTask.execute(ApiUrl.ASSETS_UPLOAD + object.getString("section_about_pic"));
+
                         AboutSocial.setSectorAboutHeader(object.getString("sector_about_header").toUpperCase());
                         AboutSocial.setSectionAboutData(object.getString("section_about_data"));
+                        AboutSocial.setSectionAboutTitle(object.getString("section_about_title"));
+                        AboutSocial.setSectionAboutLink(object.getString("section_about_link"));
+                        AboutSocial.setSlink1Name(object.getString("slink1_name"));
+                        AboutSocial.setSlink1Link(object.getString("slink1_link"));
+                        AboutSocial.setSlink2Name(object.getString("slink2_name"));
+                        AboutSocial.setSlink2Link(object.getString("slink2_link"));
+                        AboutSocial.setSlink3Name(object.getString("slink3_name"));
+                        AboutSocial.setSlink3Link(object.getString("slink3_link"));
+                        AboutSocial.setCopyRight(object.getString("copy_right"));
+                        AboutSocial.setAdminEmail(object.getString("adminEmail"));
 
 
 

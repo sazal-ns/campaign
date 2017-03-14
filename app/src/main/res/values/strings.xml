@@ -53,4 +53,18 @@
     <string name="replay">Replay</string>
     <string name="trueAns">Job Done</string>
     <string name="falseAnd">Data not saved on Server</string>
+
+    <string name="sendEmail">Send Email to Me</string>
+    <string name="fromEmail">Your Email Address</string>
+    <string name="subjectEmail">Subject</string>
+    <string name="bodyEmail">Write something .....</string>
+    <string name="send">Compose an Email</string>
+
+    <string name="beSocial">Be Social. Keep In Touch</string>
+    <string name="fb">Facebook</string>
+    <string name="gPlus">Google Plus</string>
+    <string name="twitter">Twitter</string>
+
+    <string name="subjectError">enter subject</string>
+    <string name="bodyError">body is empty</string>
 </resources>

@@ -235,6 +235,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getHomeFragment() {
         switch (navItemIndex){
+            case 6:
+                return new SocialFragment();
             case 7:
                 return new RegFragment();
             default:
