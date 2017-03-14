@@ -2,9 +2,32 @@ package com.rtsoftbd.siddiqui.campaign;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.rtsoftbd.siddiqui.campaign.helpingHand.DownImageTask;
+import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
+import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -18,18 +41,104 @@ public class SplashActivity extends AppCompatActivity {
 
         addShortCut();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            }
-        },1000);
-
-
-
+        aboutDate date = new aboutDate();
+        date.execute();
 
     }
+
+    private class aboutDate extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONObject object = jsonObject.getJSONObject("0");
+
+                        DownImageTask downImageTask = new DownImageTask();
+                        downImageTask.execute(ApiUrl.ASSETS_UPLOAD + object.getString("section_about_pic"));
+                        AboutSocial.setSectorAboutHeader(object.getString("sector_about_header").toUpperCase());
+                        AboutSocial.setSectionAboutData(object.getString("section_about_data"));
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+
+                    params.put(ApiUrl.KEY_DATA_REQUEST, ApiUrl.TABLE_ABOUT_SOCIAL);
+
+                    return params;
+                }
+            };
+
+            Volley.newRequestQueue(SplashActivity.this).add(request);
+            return "Done";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //super.onPostExecute(s);
+        }
+    }
+
+    public  static   Bitmap logo = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_face_white_48dp);
+    public  boolean is = false;
+    public static Bitmap getLogo() {
+        return logo;
+    }
+
+    public class DownImageTask extends AsyncTask<String,Void, Bitmap> {
+
+
+
+        public  boolean is() {
+            return is;
+        }
+
+        public DownImageTask(){
+            //this.imageView = imageView;
+        }
+
+
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            logo = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_face_white_48dp);
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        protected void onPostExecute(Bitmap result){
+            //imageView.setImageBitmap(result);
+            is = true;
+            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+            finish();
+            Log.e("done", String.valueOf(is));
+        }
+    }
+
 
     private void addShortCut() {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);

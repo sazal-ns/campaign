@@ -24,6 +24,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.rtsoftbd.siddiqui.campaign.helpingHand.DownImageTask;
+import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
+import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -78,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
             navItemIndex =0;
             TAG_CURRENT = TAG_ABOUT;
             loadHomeFragment();
+        }else {
+            ms_NavView.getMenu().getItem(navItemIndex).setChecked(true);
+            getSupportActionBar().setTitle(activityTitles[navItemIndex]);
         }
 
         if( getIntent().getBooleanExtra("Exit", false)){
@@ -170,6 +189,48 @@ public class MainActivity extends AppCompatActivity {
         ms_DrawerLayout.closeDrawers();
 
         invalidateOptionsMenu();
+    }
+
+    private void aboutDate() {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject object = jsonObject.getJSONObject("0");
+
+                    new DownImageTask().execute(ApiUrl.ASSETS_UPLOAD + object.getString("section_about_pic"));
+                    AboutSocial.setSectorAboutHeader(object.getString("sector_about_header").toUpperCase());
+                    AboutSocial.setSectionAboutData(object.getString("section_about_data"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put(ApiUrl.KEY_DATA_REQUEST, ApiUrl.TABLE_ABOUT_SOCIAL);
+
+                return params;
+            }
+        };
+
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("title",activityTitles[navItemIndex]);
     }
 
     @Override

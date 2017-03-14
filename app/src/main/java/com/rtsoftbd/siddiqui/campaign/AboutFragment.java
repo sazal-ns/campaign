@@ -6,13 +6,35 @@
 package com.rtsoftbd.siddiqui.campaign;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.rtsoftbd.siddiqui.campaign.helpingHand.DownImageTask;
+import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
+import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +54,8 @@ public class AboutFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static final String TAG = "AboutFragment";
 
     @BindView(R.id.proCircleImageView) CircleImageView ms_ProCircleImageView;
     @BindView(R.id.aboutHeadTextView) TextView ms_AboutHeadTextView;
@@ -81,9 +105,31 @@ public class AboutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         ButterKnife.bind(this, view);
 
-
+        if (savedInstanceState != null){
+            Log.e(TAG,"savedInstanceState");
+            ms_ProCircleImageView.setImageBitmap((Bitmap) savedInstanceState.getParcelable("img"));
+            ms_AboutHeadTextView.setText(savedInstanceState.getString("head"));
+            ms_AboutBodyTextView.setText(savedInstanceState.getString("body"));
+        }else {
+           // aboutDate();
+            ms_ProCircleImageView.setImageBitmap(SplashActivity.getLogo());
+            ms_AboutHeadTextView.setText(AboutSocial.getSectorAboutHeader());
+            ms_AboutBodyTextView.setText(AboutSocial.getSectionAboutData());
+        }
 
         return view;
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("img",SplashActivity.logo);
+        outState.putString("head",ms_AboutHeadTextView.getText().toString());
+        outState.putString("body",ms_AboutBodyTextView.getText().toString());
+
+        setRetainInstance(true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -114,7 +160,7 @@ public class AboutFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
