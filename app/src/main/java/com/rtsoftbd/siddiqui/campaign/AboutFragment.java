@@ -6,13 +6,9 @@
 package com.rtsoftbd.siddiqui.campaign;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,21 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.rtsoftbd.siddiqui.campaign.helpingHand.DownImageTask;
 import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
-import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

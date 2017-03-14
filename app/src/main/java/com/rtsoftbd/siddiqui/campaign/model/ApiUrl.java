@@ -12,6 +12,7 @@ package com.rtsoftbd.siddiqui.campaign.model;
 public final class ApiUrl {
     public static final String BASE_URL = "http://electioncampaign.tk/api/electionapi.php";
 
+
     public static final String TABLE_USER = "fwbC5IazT8FZ0yBvSazPnVzHyYEc2LfVH8qTumv1djk=";
 
     public static final String TABLE_ACHIVEMENT = "tC8IIuNZv4XCsay0VUn03htNTZK0AekNGmYS8B3dsV8=";
@@ -28,9 +29,29 @@ public final class ApiUrl {
 
     public static final String TABLE_ABOUT_SOCIAL = "h5gDONQzF\\/vvm0Dc\\/grKWjcEVqc6My9ZXxGwFSdXE4w=";
 
+
     public static final String KEY_DATA_REQUEST = "data_request";
 
+    public static final String KEY_STORE_REQUEST = "store_request";
+
     public static final String KEY_DELETE_REQUEST = "deleted_request";
+
+    public static final String KEY_USER_NAME = "user_name";
+
+    public static final String KEY_PHONE = "phone";
+
+    public static final String KEY_EMAIL = "email";
+
+    public static final String KEY_GENDER = "gender";
+
+    public static final String KEY_UPOZILA = "upozila";
+
+    public static final String KEY_UNION = "upo_union";
+
+    public static  final String KEY_WORD = "word";
+
+    public static final  String KEY_TYPE = "type";
+
 
     private static final String ASSETS_PATH = "http://electioncampaign.tk/assets/";
 

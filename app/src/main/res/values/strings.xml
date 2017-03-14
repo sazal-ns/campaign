@@ -46,4 +46,11 @@
     <string name="union">Union</string>
     <string name="word">Word</string>
     <string name="submit">Submit</string>
+
+    <string name="nameError">input name. max 256 alphanumeric</string>
+    <string name="phoneError">phone number must be 12 digits</string>
+    <string name="emailError">give valid email address</string>
+    <string name="replay">Replay</string>
+    <string name="trueAns">Job Done</string>
+    <string name="falseAnd">Data not saved on Server</string>
 </resources>

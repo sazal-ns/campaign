@@ -19,29 +19,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.rtsoftbd.siddiqui.campaign.helpingHand.DownImageTask;
 import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
-import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -87,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         activityTitles = getResources().getStringArray(R.array.nav_array);
         ms_NavView = (NavigationView) findViewById(R.id.nav_view);
+
+        View header = ms_NavView.getHeaderView(0);
+        CircleImageView pic = (CircleImageView) header.findViewById(R.id.imageView);
+        pic.setImageBitmap(SplashActivity.getLogo());
+
+        TextView textView = (TextView) header.findViewById(R.id.nameTextView);
+        textView.setText(AboutSocial.getSectorAboutHeader());
 
         setNavigationClickHandler();
 
@@ -191,41 +185,6 @@ public class MainActivity extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
-    private void aboutDate() {
-        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONObject object = jsonObject.getJSONObject("0");
-
-                    new DownImageTask().execute(ApiUrl.ASSETS_UPLOAD + object.getString("section_about_pic"));
-                    AboutSocial.setSectorAboutHeader(object.getString("sector_about_header").toUpperCase());
-                    AboutSocial.setSectionAboutData(object.getString("section_about_data"));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-
-                params.put(ApiUrl.KEY_DATA_REQUEST, ApiUrl.TABLE_ABOUT_SOCIAL);
-
-                return params;
-            }
-        };
-
-        Volley.newRequestQueue(this).add(request);
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

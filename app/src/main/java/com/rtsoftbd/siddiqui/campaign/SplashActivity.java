@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -17,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.rtsoftbd.siddiqui.campaign.helpingHand.DownImageTask;
 import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
 import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
 
