@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -24,11 +26,19 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -62,6 +72,11 @@ public class RegFragment extends Fragment {
 
     private String name, phone, email, gander, upozila, union, word;
 
+    private List<String> upozilas = new ArrayList<>();
+    private List<String> unions = new ArrayList<>();
+    private List<String> words = new ArrayList<>();
+
+    private ArrayAdapter<String> spinnerAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -106,6 +121,13 @@ public class RegFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reg, container, false);
         ButterKnife.bind(this, view);
+
+
+        loadSpinners(ApiUrl.TABLE_UPOZILA, 1);
+
+        loadSpinners(ApiUrl.TABLE_UNION, 2);
+
+        loadSpinners(ApiUrl.TABLE_WORD, 3);
 
         ms_UpozilaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -153,6 +175,67 @@ public class RegFragment extends Fragment {
 
         return view;
     }
+
+    private void loadSpinners(final String key, final int who) {
+       StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
+           @Override
+           public void onResponse(String response) {
+               try {
+                   JSONObject jsonObject = new JSONObject(response);
+
+                   Iterator keys = jsonObject.keys();
+                   while (keys.hasNext()) {
+                       String dynamicKey = (String) keys.next();
+
+                       if (!dynamicKey.contains("error")) {
+                           JSONObject object = jsonObject.getJSONObject(dynamicKey);
+
+                           if (who == 1) {
+                               upozilas.add(object.getString("upozila"));
+                           } else if (who == 2) {
+                               unions.add(object.getString("union_name"));
+
+                           } else if (who == 3) {
+                               words.add(object.getString("word"));
+                           }
+                       }
+                   }
+
+                   if (who == 1) {
+                       spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, upozilas);
+                       ms_UpozilaSpinner.setAdapter(spinnerAdapter);
+                   } else if (who == 2) {
+                       spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, unions);
+                       ms_UnionSpinner.setAdapter(spinnerAdapter);
+                   } else if (who == 3) {
+                       spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, words);
+                       ms_WordSpinner.setAdapter(spinnerAdapter);
+                   }
+
+                   spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+               } catch (JSONException e) {
+                   e.printStackTrace();
+               }
+           }
+           }, new Response.ErrorListener() {
+           @Override
+           public void onErrorResponse(VolleyError error) {
+               Log.e("Error",error.toString());
+           }
+       }){
+           @Override
+           protected Map<String, String> getParams() throws AuthFailureError {
+               Map<String, String> params = new HashMap<>();
+               params.put(ApiUrl.KEY_DATA_REQUEST, key);
+
+               return params;
+           }
+       };
+
+        Volley.newRequestQueue(getContext()).add(request);
+    }
+
 
     private void submitData() {
         if (!validate()) return;

@@ -10,24 +10,30 @@ package com.rtsoftbd.siddiqui.campaign.model;
  */
 
 public final class ApiUrl {
-    public static final String BASE_URL = "http://electioncampaign.tk/api/electionapi.php";
+    public static final String BASE_URL = "http://electioncampaign.tk/api/backup.php";
 
 
-    public static final String TABLE_USER = "fwbC5IazT8FZ0yBvSazPnVzHyYEc2LfVH8qTumv1djk=";
+    public static final String TABLE_USER = "users";
 
-    public static final String TABLE_ACHIVEMENT = "tC8IIuNZv4XCsay0VUn03htNTZK0AekNGmYS8B3dsV8=";
+    public static final String TABLE_ACHIVEMENT = "achivement";
 
-    public static final String TABLE_EDUCATION = "9Qs8Dh\\/xtNxthEtU3vuuDzo9QcY9n4J1BtsG061Dgds=";
+    public static final String TABLE_EDUCATION = "education";
 
-    public static final String TABLE_LATEST_UPDATE = "8CNT+k5WhuOIuutJyOGf2M5ZgPAgqUV2sOci5oxyeaU=";
+    public static final String TABLE_LATEST_UPDATE = "latest_update";
 
-    public static final String TABLE_GALLERY = "SLtwQ9rubBAatTYgTyDt1VmKjbIFUkHH44ixP7tLpCs=";
+    public static final String TABLE_GALLERY = "gallery";
 
-    public static final String TABLE_RESUME = "aW3aOBLQlL+of\\/1HM1Tk083Wc1Z5iSW1parN0WJQcQ0=";
+    public static final String TABLE_RESUME = "political_resume";
 
-    public static final String TABLE_VOTER_INFO = "68BRDrFS9Oc+ECcZ7MqO9\\/uO\\/PIjzjQ3tmKvnG0c2UE=";
+    public static final String TABLE_WORD = "word_opu";
 
-    public static final String TABLE_ABOUT_SOCIAL = "h5gDONQzF\\/vvm0Dc\\/grKWjcEVqc6My9ZXxGwFSdXE4w=";
+    public static final String TABLE_UPOZILA = "upozila";
+
+    public static final String TABLE_UNION = "union_opu";
+
+    public static final String TABLE_VOTER_INFO = "voter_info";
+
+    public static final String TABLE_ABOUT_SOCIAL = "manage";
 
 
     public static final String KEY_DATA_REQUEST = "data_request";

@@ -235,6 +235,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getHomeFragment() {
         switch (navItemIndex){
+            case 1:
+                return new LatestUpdateFragment();
+            case 2:
+                return new AchivementFragment();
+            case 3:
+                return new ResumeFragment();
+            case 4:
+                return new EducationFragment();
             case 6:
                 return new SocialFragment();
             case 7:

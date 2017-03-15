@@ -7,4 +7,13 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="com_margin">8dp</dimen>
+
+    <dimen name="pad_small">5dp</dimen>
+    <dimen name="pad_mid">10dp</dimen>
+    <dimen name="pad_hi">15dp</dimen>
+    <dimen name="pad_extra_hi">20dp</dimen>
+
+    <dimen name="text_small">15sp</dimen>
+    <dimen name="text_mid">20sp</dimen>
+    <dimen name="text_hi">25sp</dimen>
 </resources>
