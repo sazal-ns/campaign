@@ -243,6 +243,8 @@ public class MainActivity extends AppCompatActivity {
                 return new ResumeFragment();
             case 4:
                 return new EducationFragment();
+            case 5:
+                return new GalleryFragment();
             case 6:
                 return new SocialFragment();
             case 7:
