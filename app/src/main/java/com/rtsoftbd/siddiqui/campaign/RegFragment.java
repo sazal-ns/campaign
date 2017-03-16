@@ -222,6 +222,13 @@ public class RegFragment extends Fragment {
            @Override
            public void onErrorResponse(VolleyError error) {
                Log.e("Error",error.toString());
+               if (error.toString().contains("NoConnectionError")){
+                   new AlertDialog.Builder(getContext())
+                           .setTitle("Error")
+                           .setMessage("No Active Internet Connection :(")
+                           .show();
+
+               }
            }
        }){
            @Override

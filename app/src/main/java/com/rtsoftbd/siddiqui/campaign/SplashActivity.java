@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -81,7 +82,12 @@ public class SplashActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    if (error.toString().contains("NoConnectionError")){
+                        new AlertDialog.Builder(SplashActivity.this)
+                                .setTitle("Error")
+                                .setMessage("No Active Internet Connection :(")
+                                .show();
+                    }
                 }
             }){
                 @Override

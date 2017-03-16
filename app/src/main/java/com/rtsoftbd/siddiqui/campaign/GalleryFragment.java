@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -183,6 +184,13 @@ public class GalleryFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e("Error", error.toString());
                 pDialog.hide();
+                if (error.toString().contains("NoConnectionError")){
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Error")
+                            .setMessage("No Active Internet Connection :(")
+                            .show();
+
+                }
             }
         }) {
             @Override
