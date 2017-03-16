@@ -11,6 +11,7 @@
     tools:context="com.rtsoftbd.siddiqui.campaign.SocialFragment">
 
     <RelativeLayout
+        android:id="@+id/icons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <TextView

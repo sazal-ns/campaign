@@ -5,24 +5,24 @@
 
 package com.rtsoftbd.siddiqui.campaign;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PatternMatcher;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rtsoftbd.siddiqui.campaign.helper.FontManager;
 import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
-
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,13 +43,22 @@ public class SocialFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    @BindView(R.id.fromTextView) EditText ms_FromTextView;
-    @BindView(R.id.subjectTextView) EditText ms_SubjectTextView;
-    @BindView(R.id.bodyTextView) EditText ms_BodyTextView;
-    @BindView(R.id.sendButton) AppCompatButton ms_SendButton;
-    @BindView(R.id.fbdButton) AppCompatButton ms_FbdButton;
-    @BindView(R.id.gPlusButton) AppCompatButton ms_GPlusButton;
-    @BindView(R.id.twitterButton) AppCompatButton ms_TwitterButton;
+    @BindView(R.id.fromTextView)
+    EditText ms_FromTextView;
+    @BindView(R.id.subjectTextView)
+    EditText ms_SubjectTextView;
+    @BindView(R.id.bodyTextView)
+    EditText ms_BodyTextView;
+    @BindView(R.id.sendButton)
+    AppCompatButton ms_SendButton;
+    @BindView(R.id.fbdButton)
+    AppCompatButton ms_FbdButton;
+    @BindView(R.id.gPlusButton)
+    AppCompatButton ms_GPlusButton;
+    @BindView(R.id.twitterButton)
+    AppCompatButton ms_TwitterButton;
+    @BindView(R.id.emailTextView)
+    TextView ms_EmailTextView;
 
     private String from, subject, body;
 
@@ -96,6 +105,10 @@ public class SocialFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_social, container, false);
         ButterKnife.bind(this, view);
+        Typeface iconFont = FontManager.getTypeface(getContext(), FontManager.FONTAWESOME);
+        FontManager.markAsIconContainer(view.findViewById(R.id.icons_container), iconFont);
+        ms_EmailTextView.setText(getResources().getString(R.string.fa_icon_envelope)
+                .concat(" " + getResources().getString(R.string.sendEmail)));
         return view;
     }
 
@@ -158,7 +171,7 @@ public class SocialFragment extends Fragment {
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             Log.i("qqq", "Finished sending email...");
-        } catch (android.content.ActivityNotFoundException ex) {
+        } catch (ActivityNotFoundException ex) {
             Toast.makeText(getContext(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
 
@@ -172,20 +185,20 @@ public class SocialFragment extends Fragment {
         subject = ms_SubjectTextView.getText().toString().trim();
         body = ms_BodyTextView.getText().toString().trim();
 
-        if (from.isEmpty() || body.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+        if (from.isEmpty() || body.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             ms_FromTextView.setError(getResources().getString(R.string.emailError));
             valid = false;
-        }else ms_FromTextView.setError(null);
+        } else ms_FromTextView.setError(null);
 
-        if (subject.isEmpty()){
+        if (subject.isEmpty()) {
             ms_SubjectTextView.setError(getResources().getString(R.string.subjectError));
             valid = false;
-        }else ms_SubjectTextView.setError(null);
+        } else ms_SubjectTextView.setError(null);
 
-        if (body.isEmpty()){
+        if (body.isEmpty()) {
             ms_BodyTextView.setError(getResources().getString(R.string.bodyError));
             valid = false;
-        }else ms_BodyTextView.setError(null);
+        } else ms_BodyTextView.setError(null);
 
         return valid;
     }

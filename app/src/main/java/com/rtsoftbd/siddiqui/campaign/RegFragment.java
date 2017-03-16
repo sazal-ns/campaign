@@ -297,7 +297,7 @@ public class RegFragment extends Fragment {
 
     private void onValidationFailed() {
         if (phone.contentEquals("0099")){
-
+            
         }
     }
 

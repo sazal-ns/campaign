@@ -7,6 +7,7 @@ package com.rtsoftbd.siddiqui.campaign;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.rtsoftbd.siddiqui.campaign.helper.FontManager;
 import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
 
 import butterknife.BindView;
@@ -86,6 +88,7 @@ public class AboutFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         ButterKnife.bind(this, view);
+
 
         if (savedInstanceState != null){
             Log.e(TAG,"savedInstanceState");
