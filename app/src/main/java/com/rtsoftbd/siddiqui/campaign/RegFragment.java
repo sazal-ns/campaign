@@ -122,6 +122,8 @@ public class RegFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reg, container, false);
         ButterKnife.bind(this, view);
 
+        ms_PhoneEditText.setText("01");
+
 
         loadSpinners(ApiUrl.TABLE_UPOZILA, 1);
 
@@ -245,7 +247,10 @@ public class RegFragment extends Fragment {
 
 
     private void submitData() {
-        if (!validate()) return;
+        if (!validate()) {
+        onValidationFailed();
+            return;
+        }
 
         StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
             @Override
@@ -288,6 +293,12 @@ public class RegFragment extends Fragment {
 
         Volley.newRequestQueue(getContext()).add(request);
 
+    }
+
+    private void onValidationFailed() {
+        if (phone.contentEquals("0099")){
+
+        }
     }
 
     private boolean validate() {
