@@ -17,7 +17,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.rtsoftbd.siddiqui.campaign.R;
 import com.rtsoftbd.siddiqui.campaign.helper.AppController;
-import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
+import com.rtsoftbd.siddiqui.campaign.helper.ApiUrl;
 import com.rtsoftbd.siddiqui.campaign.model.Resume;
 
 import java.util.List;

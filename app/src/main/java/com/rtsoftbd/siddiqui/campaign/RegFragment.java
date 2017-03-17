@@ -6,9 +6,12 @@
 package com.rtsoftbd.siddiqui.campaign;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -20,18 +23,16 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
+import com.rtsoftbd.siddiqui.campaign.helper.ApiUrl;
+import com.rtsoftbd.siddiqui.campaign.helper.AppController;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -252,7 +253,7 @@ public class RegFragment extends Fragment {
             return;
         }
 
-        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.INSERT_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -297,6 +298,50 @@ public class RegFragment extends Fragment {
 
     private void onValidationFailed() {
         if (phone.contentEquals("0099")){
+            StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        JSONObject jsonObject = object.getJSONObject("0");
+                        if (ms_NameEditText.getText().toString().trim().contentEquals(jsonObject.getString("username")) &&
+                                ms_EmailEditText.getText().toString().trim().contentEquals(jsonObject.getString("password"))){
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle(getResources().getString(R.string.sure))
+                                    .setMessage(getResources().getString(R.string.admin_panel))
+                                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FragmentManager fm = getFragmentManager();
+                                            FragmentTransaction ft = fm.beginTransaction();
+                                            AdminFragment llf = new AdminFragment();
+                                            ft.replace(R.id.frame, llf);
+                                            ft.commit();
+                                        }
+                                    })
+                                    .setNegativeButton(getResources().getString(R.string.no),null)
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put(ApiUrl.KEY_DATA_REQUEST, ApiUrl.TABLE_USER);
+
+                    return params;
+                }
+            };
+
+            AppController.getInstance().addToRequestQueue(request);
             
         }
     }

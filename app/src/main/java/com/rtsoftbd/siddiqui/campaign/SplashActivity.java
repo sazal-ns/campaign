@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
-import com.rtsoftbd.siddiqui.campaign.model.ApiUrl;
+import com.rtsoftbd.siddiqui.campaign.helper.ApiUrl;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +71,6 @@ public class SplashActivity extends AppCompatActivity {
                         AboutSocial.setSlink3Link(object.getString("slink3_link"));
                         AboutSocial.setCopyRight(object.getString("copy_right"));
                         AboutSocial.setAdminEmail(object.getString("adminEmail"));
-
 
 
                     } catch (JSONException e) {

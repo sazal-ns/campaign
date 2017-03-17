@@ -89,6 +89,7 @@ public class AboutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         ButterKnife.bind(this, view);
 
+        String s =AboutSocial.getSectionAboutData().replace("\\r\\n\\r\\n",System.getProperty("line.separator"));
 
         if (savedInstanceState != null){
             Log.e(TAG,"savedInstanceState");
@@ -99,8 +100,9 @@ public class AboutFragment extends Fragment {
            // aboutDate();
             ms_ProCircleImageView.setImageBitmap(SplashActivity.getLogo());
             ms_AboutHeadTextView.setText(AboutSocial.getSectorAboutHeader());
-            ms_AboutBodyTextView.setText(AboutSocial.getSectionAboutData());
+            ms_AboutBodyTextView.setText(s);
         }
+
 
         return view;
     }

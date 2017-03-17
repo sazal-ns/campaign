@@ -67,4 +67,7 @@
 
     <string name="subjectError">enter subject</string>
     <string name="bodyError">body is empty</string>
+
+    <string name="admin_panel">Go to Admin panel …</string>
+    <string name="delete">Delete</string>
 </resources>
