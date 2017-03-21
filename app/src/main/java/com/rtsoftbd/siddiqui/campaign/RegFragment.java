@@ -61,21 +61,35 @@ public class RegFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    @BindView(R.id.nameEditText) EditText ms_NameEditText;
-    @BindView(R.id.phoneEditText) EditText ms_PhoneEditText;
-    @BindView(R.id.emailEditText) EditText ms_EmailEditText;
-    @BindView(R.id.maleRadioButton) RadioButton ms_MaleRadioButton;
-    @BindView(R.id.femaleRadioButton) RadioButton ms_FemaleRadioButton;
-    @BindView(R.id.upozilaSpinner) Spinner ms_UpozilaSpinner;
-    @BindView(R.id.unionSpinner) Spinner ms_UnionSpinner;
-    @BindView(R.id.wordSpinner) Spinner ms_WordSpinner;
-    @BindView(R.id.submitButton) AppCompatButton ms_SubmitButton;
+    @BindView(R.id.nameEditText)
+    EditText ms_NameEditText;
+    @BindView(R.id.phoneEditText)
+    EditText ms_PhoneEditText;
+    @BindView(R.id.emailEditText)
+    EditText ms_EmailEditText;
+    @BindView(R.id.maleRadioButton)
+    RadioButton ms_MaleRadioButton;
+    @BindView(R.id.femaleRadioButton)
+    RadioButton ms_FemaleRadioButton;
+    @BindView(R.id.upozilaSpinner)
+    Spinner ms_UpozilaSpinner;
+    @BindView(R.id.unionSpinner)
+    Spinner ms_UnionSpinner;
+    @BindView(R.id.wordSpinner)
+    Spinner ms_WordSpinner;
+    @BindView(R.id.submitButton)
+    AppCompatButton ms_SubmitButton;
+    @BindView(R.id.nidEditText)
+    EditText ms_NidEditText;
+    @BindView(R.id.designationSpinner)
+    Spinner ms_DesignationSpinner;
 
-    private String name, phone, email, gander, upozila, union, word;
+    private String name, phone, email, gander, upozila, union, word, nid, deg;
 
     private List<String> upozilas = new ArrayList<>();
     private List<String> unions = new ArrayList<>();
     private List<String> words = new ArrayList<>();
+    private List<String> degs = new ArrayList<>();
 
     private ArrayAdapter<String> spinnerAdapter;
 
@@ -128,9 +142,21 @@ public class RegFragment extends Fragment {
 
         loadSpinners(ApiUrl.TABLE_UPOZILA, 1);
 
-        loadSpinners(ApiUrl.TABLE_UNION, 2);
+        loadSpinners(ApiUrl.TABLE_DESIGNATION, 2);
 
         loadSpinners(ApiUrl.TABLE_WORD, 3);
+
+        ms_DesignationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                deg = parent.getItemAtPosition(position).toString().trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ms_UpozilaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -180,68 +206,69 @@ public class RegFragment extends Fragment {
     }
 
     private void loadSpinners(final String key, final int who) {
-       StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
-           @Override
-           public void onResponse(String response) {
-               try {
-                   JSONObject jsonObject = new JSONObject(response);
+        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("response", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
 
-                   Iterator keys = jsonObject.keys();
-                   while (keys.hasNext()) {
-                       String dynamicKey = (String) keys.next();
+                    Iterator keys = jsonObject.keys();
+                    while (keys.hasNext()) {
+                        String dynamicKey = (String) keys.next();
 
-                       if (!dynamicKey.contains("error")) {
-                           JSONObject object = jsonObject.getJSONObject(dynamicKey);
+                        if (!dynamicKey.contains("error")) {
+                            JSONObject object = jsonObject.getJSONObject(dynamicKey);
 
-                           if (who == 1) {
-                               upozilas.add(object.getString("upozila"));
-                           } else if (who == 2) {
-                               unions.add(object.getString("union_name"));
+                            if (who == 1) {
+                                upozilas.add(object.getString("upozila"));
+                            } else if (who == 2) {
+                                degs.add(object.getString("designation_name"));
 
-                           } else if (who == 3) {
-                               words.add(object.getString("word"));
-                           }
-                       }
-                   }
+                            } else if (who == 3) {
+                                words.add(object.getString("word"));
+                            }
+                        }
+                    }
 
-                   if (who == 1) {
-                       spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, upozilas);
-                       ms_UpozilaSpinner.setAdapter(spinnerAdapter);
-                   } else if (who == 2) {
-                       spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, unions);
-                       ms_UnionSpinner.setAdapter(spinnerAdapter);
-                   } else if (who == 3) {
-                       spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, words);
-                       ms_WordSpinner.setAdapter(spinnerAdapter);
-                   }
+                    if (who == 1) {
+                        spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, upozilas);
+                        ms_UpozilaSpinner.setAdapter(spinnerAdapter);
+                    } else if (who == 2) {
+                        spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, degs);
+                        ms_DesignationSpinner.setAdapter(spinnerAdapter);
+                    } else if (who == 3) {
+                        spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, words);
+                        ms_WordSpinner.setAdapter(spinnerAdapter);
+                    }
 
-                   spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-               } catch (JSONException e) {
-                   e.printStackTrace();
-               }
-           }
-           }, new Response.ErrorListener() {
-           @Override
-           public void onErrorResponse(VolleyError error) {
-               Log.e("Error",error.toString());
-               if (error.toString().contains("NoConnectionError")){
-                   new AlertDialog.Builder(getContext())
-                           .setTitle("Error")
-                           .setMessage("No Active Internet Connection :(")
-                           .show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Error", error.toString());
+                if (error.toString().contains("NoConnectionError")) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Error")
+                            .setMessage("No Active Internet Connection :(")
+                            .show();
 
-               }
-           }
-       }){
-           @Override
-           protected Map<String, String> getParams() throws AuthFailureError {
-               Map<String, String> params = new HashMap<>();
-               params.put(ApiUrl.KEY_DATA_REQUEST, key);
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(ApiUrl.KEY_DATA_REQUEST, key);
 
-               return params;
-           }
-       };
+                return params;
+            }
+        };
 
         Volley.newRequestQueue(getContext()).add(request);
     }
@@ -249,7 +276,7 @@ public class RegFragment extends Fragment {
 
     private void submitData() {
         if (!validate()) {
-        onValidationFailed();
+            onValidationFailed();
             return;
         }
 
@@ -258,15 +285,15 @@ public class RegFragment extends Fragment {
             public void onResponse(String response) {
 
                 if (response.contains("false"))
-                new AlertDialog.Builder(getContext())
-                        .setTitle(getResources().getString(R.string.replay))
-                        .setMessage(getResources().getString(R.string.trueAns))
-                        .show();
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(getResources().getString(R.string.replay))
+                            .setMessage(getResources().getString(R.string.trueAns))
+                            .show();
                 else
                     new AlertDialog.Builder(getContext())
-                        .setTitle(getResources().getString(R.string.replay))
-                        .setMessage(getResources().getString(R.string.falseAnd))
-                        .show();
+                            .setTitle(getResources().getString(R.string.replay))
+                            .setMessage(getResources().getString(R.string.falseAnd))
+                            .show();
 
             }
         }, new Response.ErrorListener() {
@@ -274,7 +301,7 @@ public class RegFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -286,7 +313,8 @@ public class RegFragment extends Fragment {
                 params.put(ApiUrl.KEY_UPOZILA, upozila);
                 params.put(ApiUrl.KEY_UNION, union);
                 params.put(ApiUrl.KEY_WORD, word);
-                params.put(ApiUrl.KEY_TYPE, "user");
+                params.put(ApiUrl.KEY_TYPE, deg);
+                params.put(ApiUrl.KEY_NID, nid);
 
                 return params;
             }
@@ -297,7 +325,7 @@ public class RegFragment extends Fragment {
     }
 
     private void onValidationFailed() {
-        if (phone.contentEquals("0099")){
+        if (phone.contentEquals("0099")) {
             StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -305,7 +333,7 @@ public class RegFragment extends Fragment {
                         JSONObject object = new JSONObject(response);
                         JSONObject jsonObject = object.getJSONObject("0");
                         if (ms_NameEditText.getText().toString().trim().contentEquals(jsonObject.getString("username")) &&
-                                ms_EmailEditText.getText().toString().trim().contentEquals(jsonObject.getString("password"))){
+                                ms_EmailEditText.getText().toString().trim().contentEquals(jsonObject.getString("password"))) {
                             new AlertDialog.Builder(getContext())
                                     .setTitle(getResources().getString(R.string.sure))
                                     .setMessage(getResources().getString(R.string.admin_panel))
@@ -319,7 +347,7 @@ public class RegFragment extends Fragment {
                                             ft.commit();
                                         }
                                     })
-                                    .setNegativeButton(getResources().getString(R.string.no),null)
+                                    .setNegativeButton(getResources().getString(R.string.no), null)
                                     .show();
                         }
                     } catch (JSONException e) {
@@ -331,7 +359,7 @@ public class RegFragment extends Fragment {
                 public void onErrorResponse(VolleyError error) {
 
                 }
-            }){
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
@@ -342,33 +370,33 @@ public class RegFragment extends Fragment {
             };
 
             AppController.getInstance().addToRequestQueue(request);
-            
+
         }
     }
 
     private boolean validate() {
         boolean ok = true;
 
-        if (name.isEmpty() || name.length() > 256){
+        if (name.isEmpty() || name.length() > 256) {
             ms_NameEditText.setError(getResources().getString(R.string.nameError));
             ok = false;
         } else ms_NameEditText.setError(null);
 
-        if (phone.isEmpty() || phone.length()!= 11){
+        if (phone.isEmpty() || phone.length() != 11) {
             ms_PhoneEditText.setError(getResources().getString(R.string.phoneError));
             ok = false;
         } else ms_PhoneEditText.setError(null);
 
-        if (email.isEmpty() || !email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+        if (email.isEmpty() || !email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             ms_EmailEditText.setError(getResources().getString(R.string.emailError));
             ok = false;
-        }else ms_EmailEditText.setError(null);
+        } else ms_EmailEditText.setError(null);
 
-        if (gander.isEmpty()){
+        if (gander.isEmpty()) {
             ms_MaleRadioButton.setBackgroundColor(getResources().getColor(R.color.material_red_900));
             ms_FemaleRadioButton.setBackgroundColor(getResources().getColor(R.color.material_red_900));
             ok = false;
-        }else {
+        } else {
             ms_MaleRadioButton.setBackgroundColor(getResources().getColor(android.R.color.white));
             ms_FemaleRadioButton.setBackgroundColor(getResources().getColor(android.R.color.white));
         }
@@ -377,11 +405,11 @@ public class RegFragment extends Fragment {
     }
 
 
-
     private void pickData() {
         name = ms_NameEditText.getText().toString().trim();
         phone = ms_PhoneEditText.getText().toString().trim();
         email = ms_EmailEditText.getText().toString().trim();
+        nid = ms_NidEditText.getText().toString().trim();
         if (ms_MaleRadioButton.isChecked()) gander = "male";
         else if (ms_FemaleRadioButton.isChecked()) gander = "female";
         else gander = "";
@@ -413,7 +441,6 @@ public class RegFragment extends Fragment {
         ms_MaleRadioButton.setBackgroundColor(getResources().getColor(android.R.color.white));
         ms_FemaleRadioButton.setBackgroundColor(getResources().getColor(android.R.color.white));
     }
-
 
 
     /**

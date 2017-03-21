@@ -3,6 +3,15 @@
 
     <item
         is-multidex="false"
+        jar="D:\Projects\Campaign\app\libs\bls-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2dedc9059252ed03fc5bb043026a4c0c59893fd">
+        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\bls-1.0_d7568480da2f05d8b806399e6d3db3a5cd791536.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.3\42a25dc3219429f0e5d060061f71acb49bf010a0\hamcrest-core-1.3.jar"
         jumboMode="false"
         optimize="true"
@@ -29,15 +38,6 @@
         <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\glide-3.7.0_77585503dc0a77c1a42f8158b05c972174e69ce8.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\Projects\Campaign\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a4b28a51ac68c7f0802fa687b875016e2cac28cd\classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-compiler\8.5.1\76253d53698d5a93191ebf72534e9eeb7391b5c3\butterknife-compiler-8.5.1.jar"
         jumboMode="false"
@@ -45,15 +45,6 @@
         revision="25.0.2"
         sha1="76253d53698d5a93191ebf72534e9eeb7391b5c3">
         <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\butterknife-compiler-8.5.1_952452aaae01c8ab2d765c0860cc02403d99cc4f.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Projects\Campaign\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="07d0445b61d1fbbc9ace7c9b9309904eff08bfd4">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d0a3d825c12d45aca4956f95e95b7a9515e04bf\classes.dex" />
     </item>
     <item
         is-multidex="false"

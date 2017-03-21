@@ -1,5 +1,6 @@
 package com.rtsoftbd.siddiqui.campaign;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,8 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
 import com.rtsoftbd.siddiqui.campaign.helper.ApiUrl;
+import com.rtsoftbd.siddiqui.campaign.model.AboutSocial;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,15 +30,21 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class SplashActivity extends AppCompatActivity {
 
     final static private String PREF_KEY_SHORTCUT_ADDED = "PREF_KEY_SHORTCUT_ADDED";
+    @BindView(R.id.progressBar) ProgressBar ms_ProgressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ButterKnife.bind(this);
 
         addShortCut();
 
@@ -81,14 +89,14 @@ public class SplashActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    if (error.toString().contains("NoConnectionError")){
+                    if (error.toString().contains("NoConnectionError")) {
                         new AlertDialog.Builder(SplashActivity.this)
                                 .setTitle("Error")
                                 .setMessage("No Active Internet Connection :(")
                                 .show();
                     }
                 }
-            }){
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
@@ -109,45 +117,46 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    public  static   Bitmap logo = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_face_white_48dp);
-    public  boolean is = false;
+    public static Bitmap logo = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_face_white_48dp);
+    public boolean is = false;
+
     public static Bitmap getLogo() {
         return logo;
     }
 
-    public class DownImageTask extends AsyncTask<String,Void, Bitmap> {
+    public class DownImageTask extends AsyncTask<String, Void, Bitmap> {
 
 
-
-        public  boolean is() {
+        public boolean is() {
             return is;
         }
 
-        public DownImageTask(){
+        public DownImageTask() {
             //this.imageView = imageView;
         }
 
 
-        protected Bitmap doInBackground(String...urls){
+        protected Bitmap doInBackground(String... urls) {
             String urlOfImage = urls[0];
             logo = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_face_white_48dp);
-            try{
+            try {
                 InputStream is = new URL(urlOfImage).openStream();
                 /*
                     decodeStream(InputStream is)
                         Decode an input stream into a bitmap.
                  */
                 logo = BitmapFactory.decodeStream(is);
-            }catch(Exception e){ // Catch the download exception
+            } catch (Exception e) { // Catch the download exception
                 e.printStackTrace();
             }
             return logo;
         }
 
-        protected void onPostExecute(Bitmap result){
+        protected void onPostExecute(Bitmap result) {
             //imageView.setImageBitmap(result);
             is = true;
-            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
             Log.e("done", String.valueOf(is));
         }
@@ -164,9 +173,9 @@ public class SplashActivity extends AppCompatActivity {
 
         Intent addIntent = new Intent();
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortCut);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME,getResources().getString(R.string.app_name));
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getResources().getString(R.string.app_name));
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(getApplicationContext(),R.drawable.round_icon));
+                Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.icon));
         addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         addIntent.putExtra("duplicate", false);
         getApplicationContext().sendBroadcast(addIntent);

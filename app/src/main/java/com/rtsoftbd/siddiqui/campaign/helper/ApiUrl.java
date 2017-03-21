@@ -10,11 +10,11 @@ package com.rtsoftbd.siddiqui.campaign.helper;
  */
 
 public final class ApiUrl {
-    public static final String BASE_URL = "http://electioncampaign.tk/api/backup.php";
+    public static final String BASE_URL = "http://electioncampaign.rtsoftbd.us/api/backup.php";
 
-    public static final String INSERT_URL = "http://electioncampaign.tk/api/ins.php";
+    public static final String INSERT_URL = "http://electioncampaign.rtsoftbd.us/api/ins.php";
 
-    public static final String DELETE_URL = "http://electioncampaign.tk/api/delete.php";
+    public static final String DELETE_URL = "http://electioncampaign.rtsoftbd.us/api/delete.php";
 
 
     public static final String TABLE_USER = "users";
@@ -29,11 +29,11 @@ public final class ApiUrl {
 
     public static final String TABLE_RESUME = "political_resume";
 
-    public static final String TABLE_WORD = "word_opu";
+    public static final String TABLE_WORD = "word";
 
     public static final String TABLE_UPOZILA = "upozila";
 
-    public static final String TABLE_UNION = "union_opu";
+    public static final String TABLE_DESIGNATION = "designation";
 
     public static final String TABLE_VOTER_INFO = "voter_info";
 
@@ -58,12 +58,17 @@ public final class ApiUrl {
 
     public static final String KEY_UNION = "upo_union";
 
-    public static  final String KEY_WORD = "word_cha";
+    public static  final String KEY_WORD = "word";
 
-    public static final  String KEY_TYPE = "type";
+    public static final  String KEY_TYPE = "designation";
+
+    public static final String KEY_NID = "national_Id";
+
+    public static final String KEY_PICTURE = "picture";
 
 
-    private static final String ASSETS_PATH = "http://electioncampaign.tk/assets/";
+
+    private static final String ASSETS_PATH = "http://electioncampaign.rtsoftbd.us/assets/";
 
     public  static final String ASSETS_UPLOAD = ASSETS_PATH.concat("uploads/");
 

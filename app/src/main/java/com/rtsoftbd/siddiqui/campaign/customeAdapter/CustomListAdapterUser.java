@@ -18,6 +18,7 @@ import com.rtsoftbd.siddiqui.campaign.model.User;
 
 import java.util.List;
 
+import androidbangladesh.bengali.support.BengaliUnicodeString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -61,7 +62,9 @@ public class CustomListAdapterUser extends BaseAdapter {
 
         User user = users.get(position);
 
-        viewHolder.ms_NameTextView.setText(user.getName());
+        String name = user.getName();
+        //BengaliUnicodeString.getBengaliUTF(activity.getApplication().getApplicationContext(), name, viewHolder.ms_NameTextView);
+        viewHolder.ms_NameTextView.setText( user.getName());
         viewHolder.ms_GanderTextView.setText("( "+user.getGender()+" )");
         viewHolder.ms_MobileTextView.setText(user.getPhone());
         viewHolder.ms_EmailTextView.setText(user.getEmail());

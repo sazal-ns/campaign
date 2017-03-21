@@ -137,6 +137,8 @@ public class AdminFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
 
+                    Log.i("resposnse", response);
+                    Log.i("test",jsonObject.toString());
                     Iterator keys = jsonObject.keys();
                     while (keys.hasNext()) {
                         String dynamicKey = (String) keys.next();
@@ -152,7 +154,7 @@ public class AdminFragment extends Fragment {
                             user.setGender(object.getString("gender"));
                             user.setUpozila(object.getString("upozila"));
                             user.setUpo_union(object.getString("upo_union"));
-                            user.setWord_cha(object.getString("word_cha"));
+                            //user.setWord_cha(object.getString("word"));
 
                             users.add(user);
 
