@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rtsoftbd.siddiqui.campaign.AboutFragment">
+    tools:context="com.rtsoftbd.siddiqui.engrhossain.AboutFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/som"
@@ -21,6 +21,7 @@
             android:layout_width="180dp"
             android:layout_height="180dp"
             app:civ_border_width="5dp"
+            android:background="@android:color/transparent"
             app:civ_border_color="@color/material_indigo_900"
             app:civ_border_overlay="true"
             app:layout_constraintRight_toRightOf="parent"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textSize="30sp"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -47,7 +48,8 @@
             android:layout_marginTop="16dp"
             android:padding="15sp"
             android:gravity="start"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@android:color/black"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/aboutHeadTextView" />
 

@@ -17,6 +17,7 @@
         android:layout_height="90dp"
         android:paddingTop="5dp"
         app:civ_border_width="1dp"
+        android:elevation="8dp"
         app:civ_border_color="@color/material_indigo_900"
         app:civ_border_overlay="true"
         android:src="@drawable/me"/>

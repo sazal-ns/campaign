@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rtsoftbd.siddiqui.campaign.SplashActivity">
+    tools:context="com.rtsoftbd.siddiqui.engrhossain.SplashActivity">
 
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:contentDescription="App_icon"
+        android:contentDescription="@string/app_name"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/icon"
         app:layout_constraintBottom_toBottomOf="parent"

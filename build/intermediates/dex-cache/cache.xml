@@ -2,112 +2,31 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="D:\Projects\Campaign\app\libs\bls-1.0.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="D:\Projects\EngrHossain\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="09a5479a91e283bed86e2d47ac25c0544233db9a">
+        <dex dex="D:\Projects\EngrHossain\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_1113e43545737600725614fe6f7245f130d1fec0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Projects\EngrHossain\app\libs\bls-1.0.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="e2dedc9059252ed03fc5bb043026a4c0c59893fd">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\bls-1.0_d7568480da2f05d8b806399e6d3db3a5cd791536.jar" />
+        <dex dex="D:\Projects\EngrHossain\app\build\intermediates\transforms\dex\debug\folders\1000\2\bls-1.0_19f8d0d416fc37cfc553d81aa9ea0d452dc428f7\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.3\42a25dc3219429f0e5d060061f71acb49bf010a0\hamcrest-core-1.3.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="D:\Projects\EngrHossain\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="42a25dc3219429f0e5d060061f71acb49bf010a0">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\hamcrest-core-1.3_b885ebfb4cff831d5a1f05d6636d699ac3bfc522.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\com.google.auto\auto-common\0.6\cf7212b0f8bfef12657b942df8f4f2cf032d3f41\auto-common-0.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cf7212b0f8bfef12657b942df8f4f2cf032d3f41">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\auto-common-0.6_922d307fe83f58d1b41b25a01bab8b0c1855c0e2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\glide-3.7.0_77585503dc0a77c1a42f8158b05c972174e69ce8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-compiler\8.5.1\76253d53698d5a93191ebf72534e9eeb7391b5c3\butterknife-compiler-8.5.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="76253d53698d5a93191ebf72534e9eeb7391b5c3">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\butterknife-compiler-8.5.1_952452aaae01c8ab2d765c0860cc02403d99cc4f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Android_SDK\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_858e3374f9bb95ffd9e71dabe2aa496cb035afd7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\com.google.auto.service\auto-service\1.0-rc2\51033a5b8fcf7039159e35b6878f106ccd5fb35f\auto-service-1.0-rc2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="51033a5b8fcf7039159e35b6878f106ccd5fb35f">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\auto-service-1.0-rc2_076a7ac349aca9db4e676c40bbd3d9415cc02276.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\com.squareup\javapoet\1.8.0\e858dc62ef484048540d27d36f3ec2177a3fa9b1\javapoet-1.8.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e858dc62ef484048540d27d36f3ec2177a3fa9b1">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\javapoet-1.8.0_f8faaafb68eea4b6057dd0a09633558dc8580c2d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\com\google\guava\guava\18.0\guava-18.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cce0823396aa693798f8882e64213b1772032b09">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\guava-18.0_23ae9d619c9ad952ac11ce7bff78df802e3e98c2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.gradle\caches\modules-2\files-2.1\junit\junit\4.12\2973d150c0dc1fefe998f834810d68f278ea58ec\junit-4.12.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2973d150c0dc1fefe998f834810d68f278ea58ec">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\junit-4.12_327d5f0ce69d411d9a81f89ea715dd2912c2341a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.android\build-cache\60a3e0b97cc01ecd59759a8ff4d2dba5201f550c\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\classes_6db27db925ea9e1d26bfb44641638392b97c0393.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\sazal\.android\build-cache\7b4c867a30349fc83f9266bda81b34f389761877\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="D:\Projects\Campaign\app\build\intermediates\pre-dexed\debug\classes_91652400ed53348b2dfcfd09c43970897739bdec.jar" />
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="D:\Projects\EngrHossain\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_ba62081f9a3eed50ea917c99ba65c988ed54d6cc\classes.dex" />
     </item>
 
 </items>

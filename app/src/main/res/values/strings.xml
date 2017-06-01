@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Engr Hosain</string>
+    <string name="app_name">Engr Hossain</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -15,6 +15,7 @@
     <string name="gallery">Gallery</string>
     <string name="social">Get In Touch</string>
     <string name="reg">Registration</string>
+    <string name="login">Login</string>
     <string name="be_a_part">Become A Part</string>
 
     <array name="nav_array">
@@ -26,6 +27,7 @@
         <item>@string/gallery</item>
         <item>@string/social</item>
         <item>@string/reg</item>
+        <item>@string/login</item>
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -74,9 +76,9 @@
     <string name="nid">NID</string>
 
     <string name="designation_name">Designation</string>
-    
+
     <array name="union_array">
-        <item>Dhaka</item>
+        <item>Chitoshi(E)</item>
         <item>Faridpur</item>
         <item>Gazipur</item>
         <item>Gopalganj</item>
@@ -105,6 +107,5 @@
         <item>Rangamati</item>
         <item>Bogra</item>
         <item>Naogaon</item>
-
     </array>
 </resources>
