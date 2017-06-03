@@ -7,6 +7,10 @@ package com.rtsoftbd.siddiqui.engrhossain.customeAdapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +23,11 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.rtsoftbd.siddiqui.engrhossain.R;
 import com.rtsoftbd.siddiqui.engrhossain.helper.ApiUrl;
 import com.rtsoftbd.siddiqui.engrhossain.helper.AppController;
+import com.rtsoftbd.siddiqui.engrhossain.helper.LruBitmapCache;
 import com.rtsoftbd.siddiqui.engrhossain.model.User;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,7 +75,6 @@ public class CustomListAdapterUser extends BaseAdapter {
         ViewHolder viewHolder = new ViewHolder(convertView);
 
         User user = users.get(position);
-
 
         viewHolder.ms_Image.setImageUrl(ApiUrl.ASSETS_UPLOAD+user.getImage(), imageLoader);
         viewHolder.ms_NameTextView.setText(user.getName());

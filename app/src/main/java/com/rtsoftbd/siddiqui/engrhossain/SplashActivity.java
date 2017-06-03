@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rtsoftbd.siddiqui.engrhossain.helper.ApiUrl;
+import com.rtsoftbd.siddiqui.engrhossain.helper.AppController;
 import com.rtsoftbd.siddiqui.engrhossain.model.AboutSocial;
 
 import org.json.JSONException;
@@ -110,7 +111,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             };
 
-            Volley.newRequestQueue(SplashActivity.this).add(request);
+            AppController.getInstance().addToRequestQueue(request,"S");
             return "Done";
         }
 
@@ -163,6 +164,7 @@ public class SplashActivity extends AppCompatActivity {
             //imageView.setImageBitmap(result);
             is = true;
 
+            AppController.getInstance().cancelPendingRequests("S");
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
             Log.e("done", String.valueOf(is));

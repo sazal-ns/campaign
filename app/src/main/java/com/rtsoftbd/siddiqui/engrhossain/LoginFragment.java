@@ -5,8 +5,12 @@
 
 package com.rtsoftbd.siddiqui.engrhossain;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -60,7 +65,7 @@ public class LoginFragment extends Fragment {
     AppCompatButton ms_LoginAppCompatButton;
     Unbinder unbinder;
 
-    private String userName, password;
+    private ProgressDialog progressDialog;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -105,6 +110,10 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         unbinder = ButterKnife.bind(this, view);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("accessing admin panel . . . . ");
+        progressDialog.setCancelable(false);
         return view;
     }
 
@@ -135,9 +144,8 @@ public class LoginFragment extends Fragment {
 
     @OnClick(R.id.loginAppCompatButton)
     public void onViewClicked() {
-        userName = ms_UserNameAppCompatEditText.getText().toString().trim();
-        password = ms_PasswordAppCompatEditText.getText().toString().trim();
-
+        ObjectAnimator.ofObject(ms_LoginAppCompatButton, "textColor", new ArgbEvaluator(), Color.BLUE, Color.BLACK).setDuration(3000).start();
+        progressDialog.show();
         doLogin();
     }
 
@@ -146,24 +154,26 @@ public class LoginFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
+                    progressDialog.dismiss();
                     JSONObject object = new JSONObject(response);
                     JSONObject jsonObject = object.getJSONObject("0");
                     if (ms_UserNameAppCompatEditText.getText().toString().trim().contentEquals(jsonObject.getString("username")) &&
                             ms_PasswordAppCompatEditText.getText().toString().trim().contentEquals(jsonObject.getString("password"))) {
-
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
                         AdminFragment llf = new AdminFragment();
                         ft.replace(R.id.frame, llf);
                         ft.commit();
-                    }
+                    }else new MaterialDialog.Builder(getContext()).content("User Name or Password Wrong !!!!").cancelable(true).show();
                 } catch (JSONException e) {
+                    progressDialog.dismiss();
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 if (error.toString().contains("NoConnectionError")) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Error")

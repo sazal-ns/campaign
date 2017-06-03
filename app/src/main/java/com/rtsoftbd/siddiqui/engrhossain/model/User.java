@@ -22,10 +22,26 @@ public class User {
     public String type;
     public String created_on;
     public String password;
-    public String image;
+    public String image,nid,deg;
 
     public String getImage() {
         return image;
+    }
+
+    public String getNid() {
+        return nid;
+    }
+
+    public void setNid(String nid) {
+        this.nid = nid;
+    }
+
+    public String getDeg() {
+        return deg;
+    }
+
+    public void setDeg(String deg) {
+        this.deg = deg;
     }
 
     public void setImage(String image) {

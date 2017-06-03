@@ -75,6 +75,13 @@
 
     <string name="nid">NID</string>
 
+    <!--About Us-->
+    <string name="aboutUs">ABOUT US</string>
+    <string name="developerName">Noor Nabiul Alam Siddiqui</string>
+    <string name="pos">Android Developer</string>
+    <string name="from">FB.com/sazal.ns</string>
+    <string name="copyright">Developed &amp; Copyright</string>
+    <string name="con">By  RTSoftBD.</string>
     <string name="designation_name">Designation</string>
 
     <array name="union_array">

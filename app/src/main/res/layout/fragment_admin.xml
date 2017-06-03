@@ -14,8 +14,8 @@
         android:id="@+id/userListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/material_green_500"
+        android:divider="@color/material_grey_500"
         android:dividerHeight="2dp"
-        android:listSelector="@color/material_lime_400"/>
+        android:listSelector="@color/material_blue_grey_50"/>
 
 </RelativeLayout>

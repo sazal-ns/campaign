@@ -5,27 +5,45 @@
 
 package com.rtsoftbd.siddiqui.engrhossain;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -69,7 +87,9 @@ public class AdminFragment extends Fragment {
     SwipeMenuListView ms_UserListView;
     private List<User> users = new ArrayList<>();
     private CustomListAdapterUser listAdapter;
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
+    private ProgressDialog progressDialog;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -106,6 +126,7 @@ public class AdminFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        setHasOptionsMenu(true);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Admin Panel");
     }
@@ -117,6 +138,12 @@ public class AdminFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_admin, container, false);
         ButterKnife.bind(this, view);
 
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("working . . . . ");
+        progressDialog.setCancelable(false);
+
         listAdapter = new CustomListAdapterUser(getActivity(), users);
         ms_UserListView.setAdapter(listAdapter);
 
@@ -125,6 +152,105 @@ public class AdminFragment extends Fragment {
 
         loadData();
 
+        ms_UserListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final User user = (User) parent.getItemAtPosition(position);
+
+                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = layoutInflater.inflate(R.layout.details, null);
+                if (imageLoader == null) imageLoader = AppController.getInstance().getImageLoader();
+
+                NetworkImageView imageView = (NetworkImageView) v.findViewById(R.id.image);
+                AppCompatTextView name = (AppCompatTextView) v.findViewById(R.id.name);
+                AppCompatTextView mobile = (AppCompatTextView) v.findViewById(R.id.mobile);
+                AppCompatTextView email = (AppCompatTextView) v.findViewById(R.id.email);
+                AppCompatTextView deg = (AppCompatTextView) v.findViewById(R.id.designation);
+                AppCompatTextView gender = (AppCompatTextView) v.findViewById(R.id.gender);
+                AppCompatTextView nid = (AppCompatTextView) v.findViewById(R.id.nid);
+                AppCompatTextView upzila = (AppCompatTextView) v.findViewById(R.id.upozila);
+                AppCompatTextView union = (AppCompatTextView) v.findViewById(R.id.union);
+                AppCompatTextView wor = (AppCompatTextView) v.findViewById(R.id.word);
+                AppCompatImageButton edit = (AppCompatImageButton) v.findViewById(R.id.editButton);
+                final AppCompatImageButton delete = (AppCompatImageButton) v.findViewById(R.id.deleteButton);
+
+                name.setText(user.getName());
+                mobile.setText(user.getPhone());
+                email.setText(user.getEmail());
+                deg.setText(user.getDeg());
+                gender.setText(user.getGender());
+                nid.setText(user.getNid());
+                upzila.setText(user.getUpozila());
+                union.setText(user.getUpo_union());
+                wor.setText(user.getWord_cha());
+
+                imageView.setImageUrl(ApiUrl.ASSETS_UPLOAD+user.getImage(), imageLoader);
+
+               final MaterialDialog d =   new MaterialDialog.Builder(getActivity())
+                        .customView(v, true)
+                        .autoDismiss(true)
+                        .show();
+
+                edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        progressDialog.show();
+                        new MaterialDialog.Builder(getActivity())
+                                .content(getResources().getString(R.string.sure))
+                                .positiveText("YES")
+                                .positiveColor(getResources().getColor(R.color.material_red_700))
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.DELETE_URL, new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                              progressDialog.dismiss();
+                                                if (response.contains("false")) {
+                                                    FragmentManager fm = getFragmentManager();
+                                                    FragmentTransaction ft = fm.beginTransaction();
+                                                    AdminFragment llf = new AdminFragment();
+                                                    ft.replace(R.id.frame, llf);
+                                                    ft.commit();
+                                                    d.dismiss();
+                                                }else
+                                                    new AlertDialog.Builder(getContext())
+                                                            .setTitle(getResources().getString(R.string.replay))
+                                                            .setMessage("Something Wrong.")
+                                                            .show();
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                progressDialog.dismiss();
+                                                error.printStackTrace();
+                                            }
+                                        }){
+                                            @Override
+                                            protected Map<String, String> getParams() throws AuthFailureError {
+                                                Map<String, String> params = new HashMap<>();
+                                                params.put(ApiUrl.KEY_DELETE_REQUEST, user.getVoter_id());
+
+                                                return params;
+                                            }
+                                        };
+
+                                        AppController.getInstance().addToRequestQueue(request);
+                                    }
+                                })
+                                .negativeText("NO")
+                                .show();
+                    }
+                });
+            }
+        });
         return view;
     }
 
@@ -154,6 +280,8 @@ public class AdminFragment extends Fragment {
                             user.setUpo_union(object.getString("upo_union"));
                             user.setWord_cha(object.getString("word"));
                             user.setImage(object.getString("picture"));
+                            user.setDeg(object.getString("designation"));
+                            user.setNid(object.getString("national_Id"));
 
                             users.add(user);
 
@@ -192,49 +320,18 @@ public class AdminFragment extends Fragment {
             @Override
             public void create(SwipeMenu menu) {
 
-                // create "open" item
                 SwipeMenuItem call = new SwipeMenuItem(getContext());
-                // set item background
                 call.setBackground(new ColorDrawable(Color.rgb(224, 224, 224)));
-                // set item width
                 call.setWidth(dp2px(70));
-                // set item title
                 call.setIcon(getResources().getDrawable(R.drawable.ic_call));
-                // add to menu
                 menu.addMenuItem(call);
 
-                // create "open" item
                 SwipeMenuItem sms = new SwipeMenuItem(getContext());
-                // set item width
                 sms.setWidth(dp2px(70));
-
                 sms.setBackground(new ColorDrawable(Color.rgb(192, 192, 192)));
-                // set item title
                 sms.setIcon(getResources().getDrawable(R.drawable.ic_textsms));
-                // add to menu
                 menu.addMenuItem(sms);
 
-                // create "open" item
-                SwipeMenuItem edit = new SwipeMenuItem(getContext());
-                // set item background
-                edit.setBackground(new ColorDrawable(Color.rgb(160, 160, 160)));
-                // set item width
-                edit.setWidth(dp2px(70));
-                // set item title
-                edit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
-                // add to menu
-                menu.addMenuItem(edit);
-
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(getContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(128, 128, 128)));
-                // set item width
-                openItem.setWidth(dp2px(70));
-                // set item title
-                openItem.setIcon(getResources().getDrawable(R.drawable.ic_delete_forever_red_a400_48dp));
-                // add to menu
-                menu.addMenuItem(openItem);
             }
         };
 
@@ -246,11 +343,10 @@ public class AdminFragment extends Fragment {
                 User user = users.get(position);
                 switch (index) {
                     case 0:
-                        delete(user);
+                        call(user);
                         break;
                     case 1:
-                        break;
-                    case 2:
+                        sms(user);
                         break;
                 }
 
@@ -261,7 +357,6 @@ public class AdminFragment extends Fragment {
         ms_UserListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
             @Override
             public void onSwipeStart(int position) {
-
             }
 
             @Override
@@ -272,38 +367,34 @@ public class AdminFragment extends Fragment {
 
     }
 
-    private void delete(final User user) {
-        StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.DELETE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response.contains("false")) {
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    AdminFragment llf = new AdminFragment();
-                    ft.replace(R.id.frame, llf);
-                    ft.commit();
-                }else
-                    new AlertDialog.Builder(getContext())
-                            .setTitle(getResources().getString(R.string.replay))
-                            .setMessage("Something Wrong.")
-                            .show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+    private void call(User user) {
 
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put(ApiUrl.KEY_DELETE_REQUEST, user.getVoter_id());
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:"+user.getPhone()));
+        startActivity(callIntent);
 
-                return params;
-            }
-        };
+    }
 
-        AppController.getInstance().addToRequestQueue(request);
+    private void sms(final User user) {
+        new MaterialDialog.Builder(getContext())
+                .title("Send Message")
+                .input("Message", null, false, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        Uri uri = Uri.parse("smsto:" + user.getPhone());
+                        Intent smsSIntent = new Intent(Intent.ACTION_SENDTO, uri);
+                        smsSIntent.putExtra("sms_body", input.toString());
+                        try{
+                            startActivity(smsSIntent);
+                        } catch (Exception ex) {
+                            Toast.makeText(getContext(), "Your sms has failed...",
+                                    Toast.LENGTH_LONG).show();
+                            ex.printStackTrace();
+                        }
+                    }
+                })
+                .cancelable(true)
+                .show();
     }
 
     private int dp2px(int dp) {
@@ -342,5 +433,30 @@ public class AdminFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        menu.removeItem(R.id.action_about);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sms:
+                new MaterialDialog.Builder(getContext())
+                        .customView(R.layout.details, true)
+                        .show();
+                return true;
+            case R.id.action_about:
+                new MaterialDialog.Builder(getContext())
+                        .customView(R.layout.about_us, true)
+                        .show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
