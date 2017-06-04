@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity ";
 
+    private static final String TAG_NEWS_FEED = "NEWS FEED";
     private static final String TAG_ABOUT = "ABOUT";
     private static final String TAG_LATEST_UPDATE = "LATEST UPDATE";
     private static final String TAG_ACHIEVEMENT = "ACHIEVEMENT";
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_REG = "REGISTRATION";
     private static final String TAG_LOGIN = "LOGIN";
 
-    private static String TAG_CURRENT = TAG_ABOUT;
+    private static String TAG_CURRENT = TAG_NEWS_FEED;
 
     @BindView(R.id.toolbar) Toolbar ms_Toolbar;
     @BindView(R.id.nav_view) NavigationView ms_NavView;
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             navItemIndex =0;
-            TAG_CURRENT = TAG_ABOUT;
+            TAG_CURRENT = TAG_NEWS_FEED;
             loadHomeFragment();
         }else {
             ms_NavView.getMenu().getItem(navItemIndex).setChecked(true);
@@ -113,40 +114,44 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.nav_about:
+                    case R.id.nav_news_feed:
                         navItemIndex = 0;
+                        TAG_CURRENT = TAG_NEWS_FEED;
+                        break;
+                    case R.id.nav_about:
+                        navItemIndex = 1;
                         TAG_CURRENT = TAG_ABOUT;
                         break;
                     case R.id.nav_latest_update:
-                        navItemIndex = 1;
+                        navItemIndex = 2;
                         TAG_CURRENT = TAG_LATEST_UPDATE;
                         break;
                     case R.id.nav_achievement:
-                        navItemIndex = 2;
+                        navItemIndex = 3;
                         TAG_CURRENT = TAG_ACHIEVEMENT;
                         break;
                     case R.id.nav_resume:
-                        navItemIndex = 3;
+                        navItemIndex = 4;
                         TAG_CURRENT = TAG_RESUME;
                         break;
                     case R.id.nav_education:
-                        navItemIndex = 4;
+                        navItemIndex = 5;
                         TAG_CURRENT = TAG_EDUCATION;
                         break;
                     case R.id.nav_gallery:
-                        navItemIndex = 5;
+                        navItemIndex = 6;
                         TAG_CURRENT = TAG_GALLERY;
                         break;
                     case R.id.nav_social:
-                        navItemIndex = 6;
+                        navItemIndex = 7;
                         TAG_CURRENT = TAG_SOCIAL;
                         break;
                     case R.id.nav_reg:
-                        navItemIndex = 7;
+                        navItemIndex = 8;
                         TAG_CURRENT = TAG_REG;
                         break;
                     case R.id.nav_login:
-                        navItemIndex = 8;
+                        navItemIndex = 9;
                         TAG_CURRENT = TAG_LOGIN;
                         break;
                     default:
@@ -216,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         if (shouldLoadHomeFragOnBackPress) {
             if (navItemIndex != 0) {
                 navItemIndex = 0;
-                TAG_CURRENT = TAG_ABOUT;
+                TAG_CURRENT = TAG_NEWS_FEED;
                 loadHomeFragment();
                 return;
             }
@@ -265,23 +270,25 @@ public class MainActivity extends AppCompatActivity {
     private Fragment getHomeFragment() {
         switch (navItemIndex){
             case 1:
-                return new LatestUpdateFragment();
+                return new AboutFragment();
             case 2:
-                return new AchivementFragment();
+                return new LatestUpdateFragment();
             case 3:
-                return new ResumeFragment();
+                return new AchivementFragment();
             case 4:
-                return new EducationFragment();
+                return new ResumeFragment();
             case 5:
-                return new GalleryFragment();
+                return new EducationFragment();
             case 6:
-                return new SocialFragment();
+                return new GalleryFragment();
             case 7:
-                return new RegFragment();
+                return new SocialFragment();
             case 8:
+                return new RegFragment();
+            case 9:
                 return new LoginFragment();
             default:
-                return new AboutFragment();
+                return new StatusFragment();
         }
     }
 }

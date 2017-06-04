@@ -16,9 +16,11 @@
     <string name="social">Get In Touch</string>
     <string name="reg">Registration</string>
     <string name="login">Login</string>
+    <string name="news_feed">News Feed</string>
     <string name="be_a_part">Become A Part</string>
 
     <array name="nav_array">
+        <item>@string/news_feed</item>
         <item>@string/about</item>
         <item>@string/latest_update</item>
         <item>@string/achievement</item>

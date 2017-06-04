@@ -13,12 +13,18 @@ public final class ApiUrl {
 
     private static final String URL= "http://engrhossaininfo.tk/api/";
 
+    private static final String URL_2 = "http://engrhossaininfo.tk/Mobile_api/";
+
     public static final String BASE_URL = URL.concat("backup.php");
 
     public static final String INSERT_URL = URL.concat("ins.php");
 
     public static final String DELETE_URL = URL.concat("delete.php");
 
+    public static final String STATUS_URL = URL_2.concat("submit_status");
+
+
+    public static final String TABLE_STATUS = "status";
 
     public static final String TABLE_USER = "users";
 
