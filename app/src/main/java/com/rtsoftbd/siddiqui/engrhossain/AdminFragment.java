@@ -455,6 +455,7 @@ public class AdminFragment extends Fragment {
                         .customView(R.layout.about_us, true)
                         .show();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

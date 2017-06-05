@@ -23,6 +23,18 @@ public final class ApiUrl {
 
     public static final String STATUS_URL = URL_2.concat("submit_status");
 
+    public static final String DELETE_STATUS_URL = URL_2.concat("delete_status");
+
+    public static final String UPDATE_STATUS_URL = URL_2.concat("update_status");
+
+    public static final String KEY_STATUS_ID = "status_id";
+
+    public static final String KEY_STATUS_DATA = "status_data";
+
+    public static final String KEY_STATUS_UPDATE_ID = "statusid";
+
+    public static final String _UNION = URL_2.concat("unionbag");
+
 
     public static final String TABLE_STATUS = "status";
 

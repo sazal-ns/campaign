@@ -5,6 +5,7 @@
 
 package com.rtsoftbd.siddiqui.engrhossain.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +13,9 @@ import java.util.List;
  * Created by RTsoftBD_Siddiqui on 2017-06-04.
  */
 
-public class Status {
+public class Status implements Serializable {
     int id, is_active;
     String status, _date;
-
-    static List<Status> statusList = new ArrayList<>();
-
-    public static List<Status> getStatusList() {
-        return statusList;
-    }
-
-    public static void setStatusList(Status statusList) {
-        Status.statusList.add(statusList);
-    }
 
     public Status() {
     }
@@ -67,4 +58,6 @@ public class Status {
     public void set_date(String _date) {
         this._date = _date;
     }
+
+
 }

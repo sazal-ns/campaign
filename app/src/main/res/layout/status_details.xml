@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_edit"
                 android:layout_gravity="end|bottom"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="80dp"
                 android:elevation="8dp"
                 app:pressedTranslationZ="8dp"/>
 

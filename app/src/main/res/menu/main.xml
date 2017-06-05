@@ -13,4 +13,9 @@
         android:title="About"
         android:icon="@android:drawable/ic_dialog_info"
         app:showAsAction="always"/>
+
+    <item
+        android:id="action_status"
+        android:title="Add Status"/>
+
 </menu>

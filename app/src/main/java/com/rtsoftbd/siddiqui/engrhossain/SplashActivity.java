@@ -60,54 +60,6 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
 
-
-            StringRequest request1 = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-
-                        Iterator keys = jsonObject.keys();
-                        while (keys.hasNext()) {
-                            String dynamicKey = (String) keys.next();
-
-                            if (!dynamicKey.contains("error")) {
-                                JSONObject object = jsonObject.getJSONObject(dynamicKey);
-
-                                com.rtsoftbd.siddiqui.engrhossain.model.Status status = new com.rtsoftbd.siddiqui.engrhossain.model.Status(
-                                        object.getInt("statusid"),object.getInt("is_active"), object.getString("status_details"),"10/05/2017");
-
-                                com.rtsoftbd.siddiqui.engrhossain.model.Status.setStatusList(status);
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("Error", error.toString());
-                    if (error.toString().contains("NoConnectionError")) {
-                        new AlertDialog.Builder(SplashActivity.this)
-                                .setTitle("Error")
-                                .setMessage("No Active Internet Connection :(")
-                                .show();
-                    }
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put(ApiUrl.KEY_DATA_REQUEST, ApiUrl.TABLE_STATUS);
-
-                    return params;
-                }
-            };
-
-            AppController.getInstance().addToRequestQueue(request1, "S");
-
-
             StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.BASE_URL, new Response.Listener<String>() {
 
                 @Override

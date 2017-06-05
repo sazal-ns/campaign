@@ -8,15 +8,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
-    android:layout_margin="10dp">
-
+    android:background="@android:color/white">
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        android:text="This world is cruel and merciless but it is also very beautiful This world is cruel and merciless but it is also very beautiful"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:ellipsize="end"
         android:maxLines="2"
@@ -29,7 +26,6 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10/05/2017"
         android:textColor="@color/material_blue_grey_600"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:textStyle="italic"

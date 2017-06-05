@@ -146,6 +146,8 @@ public class RegFragment extends Fragment {
 
         loadSpinners(ApiUrl.TABLE_WORD, 3);
 
+       // loadSpinners(ApiUrl._UNION, 4);
+
         ms_DesignationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

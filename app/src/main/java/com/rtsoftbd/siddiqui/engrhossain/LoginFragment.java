@@ -10,6 +10,7 @@ import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -102,6 +104,17 @@ public class LoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        SharedPreferences preferences = getContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        if(preferences.getBoolean("login",false)) {
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            AdminFragment llf = new AdminFragment();
+            ft.replace(R.id.frame, llf);
+            ft.commit();
+        }
+
+
     }
 
     @Override
@@ -114,6 +127,7 @@ public class LoginFragment extends Fragment {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("accessing admin panel . . . . ");
         progressDialog.setCancelable(false);
+
         return view;
     }
 
@@ -159,6 +173,11 @@ public class LoginFragment extends Fragment {
                     JSONObject jsonObject = object.getJSONObject("0");
                     if (ms_UserNameAppCompatEditText.getText().toString().trim().contentEquals(jsonObject.getString("username")) &&
                             ms_PasswordAppCompatEditText.getText().toString().trim().contentEquals(jsonObject.getString("password"))) {
+
+                        SharedPreferences.Editor editor = getContext().getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+                        editor.putBoolean("login", true);
+                        editor.apply();
+
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
                         AdminFragment llf = new AdminFragment();

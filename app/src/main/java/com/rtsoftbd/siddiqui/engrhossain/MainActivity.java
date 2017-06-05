@@ -9,6 +9,7 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
+    private boolean isLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         if( getIntent().getBooleanExtra("Exit", false)){
             finish();
         }
+
+
     }
 
     private void setNavigationClickHandler() {
@@ -185,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
         ms_NavView.getMenu().getItem(navItemIndex).setChecked(true);
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
 
-
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -226,6 +230,9 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
+            SharedPreferences.Editor editor = getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+            editor.putBoolean("login", false);
+            editor.apply();
 
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle(getResources().getString(R.string.exit))
@@ -266,6 +273,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    protected void onDestroy() {
+        SharedPreferences.Editor editor = getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+        editor.putBoolean("login", false);
+        editor.apply();
+        super.onDestroy();
+    }
 
     private Fragment getHomeFragment() {
         switch (navItemIndex){
