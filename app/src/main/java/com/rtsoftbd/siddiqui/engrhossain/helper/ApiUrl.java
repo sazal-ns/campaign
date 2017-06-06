@@ -29,9 +29,13 @@ public final class ApiUrl {
 
     public static final String KEY_STATUS_ID = "status_id";
 
+    public static final String KEY_USER_STATUS_ID = "userid";
+
     public static final String KEY_STATUS_DATA = "status_data";
 
     public static final String KEY_STATUS_UPDATE_ID = "statusid";
+
+    public static final String KEY_STATUS_DATE_ = "statustime";
 
     public static final String _UNION = URL_2.concat("unionbag");
 

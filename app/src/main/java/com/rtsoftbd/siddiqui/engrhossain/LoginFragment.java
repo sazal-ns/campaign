@@ -114,8 +114,8 @@ public class LoginFragment extends Fragment {
             ft.commit();
         }
 
-
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

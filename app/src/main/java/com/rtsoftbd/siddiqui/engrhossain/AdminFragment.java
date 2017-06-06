@@ -22,8 +22,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.InputType;
+import android.text.Layout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -33,6 +37,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,15 +59,22 @@ import com.rtsoftbd.siddiqui.engrhossain.customeAdapter.CustomListAdapterUser;
 import com.rtsoftbd.siddiqui.engrhossain.helper.ApiUrl;
 import com.rtsoftbd.siddiqui.engrhossain.helper.AppController;
 import com.rtsoftbd.siddiqui.engrhossain.helper.FontManager;
+import com.rtsoftbd.siddiqui.engrhossain.helper.LoadDropDown;
+import com.rtsoftbd.siddiqui.engrhossain.model.Union_MS;
+import com.rtsoftbd.siddiqui.engrhossain.model.Upozila_MS;
 import com.rtsoftbd.siddiqui.engrhossain.model.User;
+import com.rtsoftbd.siddiqui.engrhossain.model.Word_MS;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -201,7 +213,7 @@ public class AdminFragment extends Fragment {
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        progressDialog.show();
+
                         new MaterialDialog.Builder(getActivity())
                                 .content(getResources().getString(R.string.sure))
                                 .positiveText("YES")
@@ -209,6 +221,7 @@ public class AdminFragment extends Fragment {
                                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                                     @Override
                                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        progressDialog.show();
                                         StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.DELETE_URL, new Response.Listener<String>() {
                                             @Override
                                             public void onResponse(String response) {
@@ -446,13 +459,65 @@ public class AdminFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sms:
-                new MaterialDialog.Builder(getContext())
-                        .customView(R.layout.details, true)
-                        .show();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                SendSmsFragment llf = new SendSmsFragment();
+                ft.replace(R.id.frame, llf);
+                ft.commit();
                 return true;
             case R.id.action_about:
                 new MaterialDialog.Builder(getContext())
                         .customView(R.layout.about_us, true)
+                        .show();
+                return true;
+            case R.id.action_status:
+                new MaterialDialog.Builder(getContext())
+                        .title("Post Status")
+                        .inputType(InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE | InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE)
+                        .inputRange(1,1000)
+                        .input(null, null, false, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(@NonNull MaterialDialog dialog, final CharSequence input) {
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyy");
+                                final String today = dateFormat.format(Calendar.getInstance(Locale.ENGLISH).getTime());
+                                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                                progressDialog.setIndeterminate(true);
+                                progressDialog.setMessage("Posting Status .....");
+                                progressDialog.show();
+
+                                StringRequest request = new StringRequest(Request.Method.POST, ApiUrl.STATUS_URL, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        progressDialog.dismiss();
+                                        if (response.contains("false")){
+                                            new MaterialDialog.Builder(getContext())
+                                                    .content("Done")
+                                                    .show();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        progressDialog.dismiss();
+                                        error.printStackTrace();
+                                    }
+                                }){
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String,String> params = new HashMap<String, String>();
+                                        params.put(ApiUrl.KEY_STATUS_DATA, input.toString());
+                                        params.put(ApiUrl.KEY_USER_STATUS_ID, "100");
+                                        params.put(ApiUrl.KEY_STATUS_DATE_, today);
+
+                                        return params;
+                                    }
+                                };
+
+                                AppController.getInstance().addToRequestQueue(request);
+
+                            }
+                        })
+                        .cancelable(true)
                         .show();
                 return true;
 

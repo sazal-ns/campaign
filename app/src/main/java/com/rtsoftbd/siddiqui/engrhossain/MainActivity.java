@@ -256,7 +256,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        menu.removeItem(R.id.action_sms);
+        if (!isLogin) {
+            menu.removeItem(R.id.action_sms);
+            menu.removeItem(R.id.action_status);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

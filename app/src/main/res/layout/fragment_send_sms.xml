@@ -1,0 +1,34 @@
+<!--
+  ~ Copyright By Noor Nabiul Alam Siddiqui  (c) 2017.
+  ~  www.fb.com/sazal.ns
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context="com.rtsoftbd.siddiqui.engrhossain.SendSmsFragment">
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/upozilaSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:theme="@style/SpinnerItem"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/unionSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:theme="@style/SpinnerItem.DropDownItem"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/wordSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
