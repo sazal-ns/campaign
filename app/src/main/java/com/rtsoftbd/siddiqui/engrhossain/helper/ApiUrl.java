@@ -39,6 +39,20 @@ public final class ApiUrl {
 
     public static final String _UNION = URL_2.concat("unionbag");
 
+    public static final String SEND_SMS = "http://engrhossaininfo.tk/Mobile_api/checksms";
+
+    public static final String KEY_SMS_BODY = "description";
+
+    public static final String KEY_SMS_UPOZILA = "upozila";
+
+    public static final String KEY_SMS_UNION = "union_checksms";
+
+    public static final String KEY_SMS_WORD = "word_checksms";
+
+    public static final String URL_ADD = "http://engrhossaininfo.tk/Mobile_api/add_voter";
+
+    public static final String KEY_USER_FILE = "userfile";
+
 
     public static final String TABLE_STATUS = "status";
 
@@ -71,7 +85,7 @@ public final class ApiUrl {
 
     public static final String KEY_DELETE_REQUEST = "delete_request";
 
-    public static final String KEY_USER_NAME = "user_name";
+    public static final String KEY_USER_NAME = "User_Name";
 
     public static final String KEY_PHONE = "phone";
 
@@ -89,7 +103,7 @@ public final class ApiUrl {
 
     public static final String KEY_NID = "national_Id";
 
-    public static final String KEY_PICTURE = "picture";
+    public static final String KEY_ADDRESS = "address";
 
 
 

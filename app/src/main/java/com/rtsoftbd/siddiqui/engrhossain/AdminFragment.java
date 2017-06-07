@@ -186,6 +186,8 @@ public class AdminFragment extends Fragment {
                 AppCompatImageButton edit = (AppCompatImageButton) v.findViewById(R.id.editButton);
                 final AppCompatImageButton delete = (AppCompatImageButton) v.findViewById(R.id.deleteButton);
 
+                edit.setVisibility(View.GONE);
+
                 name.setText(user.getName());
                 mobile.setText(user.getPhone());
                 email.setText(user.getEmail());
