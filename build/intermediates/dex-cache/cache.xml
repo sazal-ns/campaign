@@ -3,30 +3,93 @@
 
     <item
         is-multidex="true"
-        jar="D:\Projects\EngrHossain\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\httpcore-4.3.3.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="4f920d200c2f7616d793f5fc3d86bd6315c25e0f">
-        <dex dex="D:\Projects\EngrHossain\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_1113e43545737600725614fe6f7245f130d1fec0\classes.dex" />
+        sha1="f91b7a4aadc5cf486df6e4634748d7dd7a73f06d">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\transforms\dex\debug\folders\1000\2\httpcore-4.3.3_681d8a4ba84c9483acbf2cbf0dcedc0afc60bbb2\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="D:\Projects\EngrHossain\app\libs\bls-1.0.jar"
+        jar="F:\Project\Andoroid\DipuMoni\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d0d0cd9d47aed9940c232a5157024a09a4174212">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_1be5c0753748ff3500631ad508d0065c3d8ba50c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\httpclient-4.3.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f3cf3b25e14d3bca47773e95aa85ea8fefbf8e81">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\transforms\dex\debug\folders\1000\2\httpclient-4.3.6_80c47c270b02635068dd6c0ab9a28f4798666793\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\httpclient-4.3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f3cf3b25e14d3bca47773e95aa85ea8fefbf8e81">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\pre-dexed\release\httpclient-4.3.6_80c47c270b02635068dd6c0ab9a28f4798666793.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\bls-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2dedc9059252ed03fc5bb043026a4c0c59893fd">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\pre-dexed\release\bls-1.0_5ccf7cc8858a2ef7d28813541167dcf2635ac08f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\httpmime-4.3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="66a39a5e37d5da40fdad6176fc24ef4316e74702">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\pre-dexed\release\httpmime-4.3.6_dbe4b816de50d847aab892616160cc220aef6827.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Project\Andoroid\DipuMoni\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_4e419764e1370aed79d0e44d10cc60497eea729b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\httpmime-4.3.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="66a39a5e37d5da40fdad6176fc24ef4316e74702">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\transforms\dex\debug\folders\1000\2\httpmime-4.3.6_dbe4b816de50d847aab892616160cc220aef6827\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\bls-1.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="e2dedc9059252ed03fc5bb043026a4c0c59893fd">
-        <dex dex="D:\Projects\EngrHossain\app\build\intermediates\transforms\dex\debug\folders\1000\2\bls-1.0_19f8d0d416fc37cfc553d81aa9ea0d452dc428f7\classes.dex" />
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\transforms\dex\debug\folders\1000\2\bls-1.0_5ccf7cc8858a2ef7d28813541167dcf2635ac08f\classes.dex" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\Projects\EngrHossain\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="F:\Project\Andoroid\DipuMoni\app\libs\httpcore-4.3.3.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
-        <dex dex="D:\Projects\EngrHossain\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_ba62081f9a3eed50ea917c99ba65c988ed54d6cc\classes.dex" />
+        sha1="f91b7a4aadc5cf486df6e4634748d7dd7a73f06d">
+        <dex dex="F:\Project\Andoroid\DipuMoni\app\build\intermediates\pre-dexed\release\httpcore-4.3.3_681d8a4ba84c9483acbf2cbf0dcedc0afc60bbb2.jar" />
     </item>
 
 </items>

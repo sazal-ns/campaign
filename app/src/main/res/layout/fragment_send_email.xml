@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rtsoftbd.siddiqui.engrhossain.SendEmailFragment">
+    tools:context="com.rtsoftbd.siddiqui.drDipuMoni.SendEmailFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

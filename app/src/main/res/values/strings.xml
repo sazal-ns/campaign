@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Engr Hossain</string>
+    <string name="app_name">Dr. Dipu Moni</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -9,6 +9,7 @@
 
     <string name="about">About</string>
     <string name="latest_update">Latest Update</string>
+    <string name="dev_work">Development Work</string>
     <string name="achievement">Achievements</string>
     <string name="resume">Political Resume</string>
     <string name="education">Education</string>
@@ -23,6 +24,7 @@
         <item>@string/news_feed</item>
         <item>@string/about</item>
         <item>@string/latest_update</item>
+        <item>@string/dev_work</item>
         <item>@string/achievement</item>
         <item>@string/resume</item>
         <item>@string/education</item>

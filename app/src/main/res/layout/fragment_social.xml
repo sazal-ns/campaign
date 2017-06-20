@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/activity_horizontal_margin"
-    tools:context="com.rtsoftbd.siddiqui.engrhossain.SocialFragment">
+    tools:context="com.rtsoftbd.siddiqui.drDipuMoni.SocialFragment">
 
     <RelativeLayout
         android:id="@+id/icons_container"
